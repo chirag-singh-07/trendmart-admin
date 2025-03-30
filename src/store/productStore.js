@@ -65,6 +65,7 @@ export const useProductStore = create((set) => ({
   },
 
   deleteProduct: async (productId) => {
+    
     set({ isLoading: true, error: null });
     try {
       await axios.delete(`${API_URL}/product/delete/${productId}`);

@@ -16,11 +16,12 @@ const ProductCard = ({
   setCurrentEditedId,
   setOpenCreateProductDialog,
   setFormData,
+  onDelete,
 }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const handleDelete = () => {
-    // onDelete(product.id); // Call the parent function to delete the product
+    onDelete(product.id); // Call the parent function to delete the product
     setIsDialogOpen(false); // Close the dialog after deletion
   };
 
@@ -71,11 +72,11 @@ const ProductCard = ({
                   this product from the system.
                 </DialogDescription>
               </DialogHeader>
-              <DialogFooter>
+              <DialogFooter className={``}>
                 <Button onClick={() => setIsDialogOpen(false)}>Cancel</Button>
                 <Button
                   onClick={handleDelete}
-                  className="bg-red-500 text-white"
+                  className="bg-red-500 text-white mb-4"
                 >
                   Confirm Delete
                 </Button>

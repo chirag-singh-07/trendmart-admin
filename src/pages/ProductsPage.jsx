@@ -35,7 +35,7 @@ const ProductsPage = () => {
   const [imageloading, setImageLoading] = useState(false);
   const [currentEditedId, setCurrentEditedId] = useState(null);
 
-  const { addProduct, getAllProducts, products, updateProduct } =
+  const { addProduct, getAllProducts, products, updateProduct, deleteProduct } =
     useProductStore();
 
   const onSubmit = async (e) => {
@@ -59,6 +59,18 @@ const ProductsPage = () => {
       // Close dialog and reset form after successful submission
     } catch (error) {
       console.error("Error adding product:", error);
+    }
+  };
+
+  const isFormValid = () => {
+    return Object.keys(formData)
+      .filter((key) => key !== "salePrice") // Exclude salePrice from validation
+      .every((key) => formData[key] !== "");
+  };
+
+  const handleProductDelete = (getCurrentProductId) => {
+    if (getCurrentProductId !== null) {
+      deleteProduct(getCurrentProductId);
     }
   };
 
@@ -90,6 +102,7 @@ const ProductsPage = () => {
                 setCurrentEditedId={setCurrentEditedId}
                 setOpenCreateProductDialog={setOpenCreateProductDialog}
                 setFormData={setFormData}
+                onDelete={handleProductDelete}
               />
             ))
           : null}
@@ -128,6 +141,7 @@ const ProductsPage = () => {
               setFormData={setFormData}
               buttonText={currentEditedId !== null ? "Update" : "Add"}
               onSubmit={onSubmit}
+              isBtnDisable={!isFormValid()}
             />
           </div>
         </SheetContent>

@@ -31,8 +31,8 @@ const App = () => {
 
   if (isCheckingAuth)
     return (
-      <div className="flex items-center justify-center">
-        <Loader className="animate-spin text-lg" />
+      <div className="flex items-center justify-center h-screen">
+        <Loader className="animate-spin text-2xl" />
       </div>
     );
   return (
